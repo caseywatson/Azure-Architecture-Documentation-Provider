@@ -17,7 +17,7 @@ on:
       # fire an event when the document lands that includes this additional metadata. We'll use
       # this metadata to further process the generated doc (send it to a list of email recipients, etc.) 
       # so we don't have to persist it somewhere else.
-      metadata:
+      docMetadata:
         description: "Metadata that will be appended to the generated doc in blob storage."
         required: true
 
@@ -29,13 +29,6 @@ jobs:
       # Check out the repo...
       - uses: actions/checkout@v3
         name: Check out repo
-        
-      # Push the PDF up to blob storage with its associated metadata...
-      - uses: Azure/CLI@v1
-        with:
-          azcliversion: 2.34.1
-          inlineScript: |
-            echo "Ayyyyyyyyyy."
           
       # Let's build a doc...
       - uses: docker://pandoc/latex:2.9
@@ -47,4 +40,20 @@ jobs:
             --standalone 
             --output=result.pdf 
             ${{ env.DocList }}
+            
+      # Push the PDF up to blob storage with its associated metadata...
+      - uses: Azure/CLI@v1
+        name: Upload PDF to blob storage
+        env:
+          DocId: ${{ github.event.inputs.docId }}
+          DocMetadata: ${{ github.event.inputs.docMetadata }}
+          StorageConnectionString: ${{ secrets.AZURE_BLOB_CONNECTION_STRING }}
+        with:
+          inlineScript: |
+            az storage blob upload \
+              --connection-string "${{ env.StorageConnectionString }}" \
+              --container-name "pdfs" \
+              --file "result.pdf" \
+              --metadata docMetadata="${{ env.DocMetadata }}" \
+              --name "${{ env.DocId }}.pdf"
             
