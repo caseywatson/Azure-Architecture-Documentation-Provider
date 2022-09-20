@@ -52,8 +52,8 @@ jobs:
             #!/bin/bash 
 
             az storage blob upload \
-              --file "result.pdf" \
-              --container "pdfs" \
-              --blob "${{ env.DocId }}.pdf" \
-              --metadata pdf_metadata="${{ env.Metadata }}"
+              --file result.pdf \
+              --container pdfs \
+              --blob "${{ env.DocId }}.pdf"
+              --connection-string "${{ secrets.AZURE_BLOB_CONNECTION_STRING }}"
             
