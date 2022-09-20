@@ -55,11 +55,11 @@ jobs:
         name: Upload PDF to blob storage
         with:
           inlineScript: | 
-          #!/bin/bash
-          
-          az storage blob upload \
-            --file "output/result.pdf" \
-            --container "pdfs" \
-            --blob "${{ env.DocId }}.pdf" \
-            --metadata pdf_metadata="${{ env.Metadata }}"
+            #!/bin/bash 
+
+            az storage blob upload \
+              --file "output/result.pdf" \
+              --container "pdfs" \
+              --blob "${{ env.DocId }}.pdf" \
+              --metadata pdf_metadata="${{ env.Metadata }}"
             
