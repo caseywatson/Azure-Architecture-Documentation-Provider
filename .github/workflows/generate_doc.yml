@@ -17,24 +17,37 @@ on:
         description: "Metadata that will be appended to the generated doc in blob storage."
         required: true
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    
+    env:
+      DocList: ${{ github.event.inputs.docList }}
+      Metadata: ${{ github.event.inputs.metadata }}
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Check out the repo...
       - uses: actions/checkout@v3
+        name: Check out repo
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      # Log in to Azure...
+      - uses: azure/login@v1
+        name: Log in to Azure
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
+      # Let's build a doc...
+      - uses: docker://pandoc/latex:2.9
+        name: Generate PDF
+        with:
+          args: >-
+            --standalone 
+            --output=output/result.pdf 
+            ${{ env.DocList }}
+            
+      # Push the PDF up to blob storage with its associated metadata...
+      - uses: Azure/CLI@v1
+        name: Upload PDF to blob storage
+        with:
+          inlineScript: |
+          #!bin/bash
