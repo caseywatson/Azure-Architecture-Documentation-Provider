@@ -41,7 +41,7 @@ jobs:
         with:
           args: >-
             --standalone 
-            --output=output/result.pdf 
+            --output=result.pdf 
             ${{ env.DocList }}
             
       # Push the PDF up to blob storage with its associated metadata...
@@ -52,7 +52,7 @@ jobs:
             #!/bin/bash 
 
             az storage blob upload \
-              --file "output/result.pdf" \
+              --file "result.pdf" \
               --container "pdfs" \
               --blob "${{ env.DocId }}.pdf" \
               --metadata pdf_metadata="${{ env.Metadata }}"
