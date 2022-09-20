@@ -35,6 +35,7 @@ jobs:
         id: create_pdf_output_director
         run: |
           mkdir output
+          echo "# This is a test..." > test.md
           
       # Let's build a doc...
       - uses: docker://pandoc/latex:2.9
@@ -42,7 +43,7 @@ jobs:
         env:
           DocList: ${{ github.event.inputs.docList }}
         with:
-          args: --output=output/result.pdf ${{ env.DocList }}
+          args: --output=output/result.pdf "test.md"
           
       - uses: actions/upload-artifact@master
         with:
