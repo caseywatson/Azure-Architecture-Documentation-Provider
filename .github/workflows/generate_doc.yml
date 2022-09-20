@@ -49,8 +49,6 @@ jobs:
         name: Upload PDF to blob storage
         with:
           inlineScript: | 
-            #!/bin/bash 
-
             az storage blob upload \
               --file result.pdf \
               --container pdfs \
