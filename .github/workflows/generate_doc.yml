@@ -1,0 +1,40 @@
+name: Generate Doc
+
+on:
+  # This workflow will be dispatched only by the doc generator API.
+  workflow_dispatch:
+    inputs:
+      # Pandoc requires that the input files be provided a single space-delimited string.
+      # For simplicity's sake, we'll put that burden on the caller -- our doc generator API.
+      docList:
+        description: "A space-delimited ordered list of the MD files to be included in the generated doc"
+        required: true
+      # Once the doc is generated, we'll push it up to Azure blob storage. Event grid will
+      # fire an event when the document lands that includes this additional metadata. We'll use
+      # this metadata to further process the generated doc (send it to a list of email recipients, etc.) 
+      # so we don't have to persist it somewhere else.
+      metadata:
+        description: "Metadata that will be appended to the generated doc in blob storage."
+        required: true
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
