@@ -24,9 +24,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
-    env:
-      DocList: ${{ github.event.inputs.docList }}
 
     steps:
       # Check out the repo...
@@ -43,6 +40,8 @@ jobs:
       # Let's build a doc...
       - uses: docker://pandoc/latex:2.9
         name: Generate PDF
+        env:
+          DocList: ${{ github.event.inputs.docList }}
         with:
           args: >-
             --standalone 
