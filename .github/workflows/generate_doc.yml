@@ -42,9 +42,7 @@ jobs:
         env:
           DocList: ${{ github.event.inputs.docList }}
         with:
-          args: >-
-            --output=output/result.pdf 
-            ${{ env.DocList }}
+          args: --output=output/result.pdf ${{ env.DocList }}
             
       # Push the PDF up to blob storage with its associated metadata...
       - uses: Azure/CLI@v1
