@@ -29,6 +29,12 @@ jobs:
       # Check out the repo...
       - uses: actions/checkout@v3
         name: Check out repo
+        
+      # Create an output directory for the PDF...
+      - name: Create PDF output directory
+        id: create_pdf_output_director
+        run: |
+          mkdir output
           
       # Let's build a doc...
       - uses: docker://pandoc/latex:2.9
@@ -53,7 +59,7 @@ jobs:
             az storage blob upload \
               --connection-string "${{ env.StorageConnectionString }}" \
               --container-name "pdfs" \
-              --file "skibeebop.pdf" \
+              --file "output/result.pdf" \
               --metadata docMetadata="${{ env.DocMetadata }}" \
               --name "${{ env.DocId }}.pdf"
             
