@@ -36,9 +36,8 @@ jobs:
       # Push the PDF up to blob storage with its associated metadata...
       - uses: Azure/CLI@v1
         with:
+          azcliversion: 2.34.1
           inlineScript: |
-            #!/bin/bash
-            
             echo "Ayyyyyyyyyy."
           
       # Let's build a doc...
