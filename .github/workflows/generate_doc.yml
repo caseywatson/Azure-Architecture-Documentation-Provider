@@ -45,9 +45,10 @@ jobs:
             ${{ env.DocList }}
             
       # Push the PDF up to blob storage with its associated metadata...
-      - uses: Azure/CLI@v1
+      - uses: azure/CLI@v1
         name: Upload PDF to blob storage
         with:
+          azcliversion: 2.30.0
           inlineScript: | 
             az storage blob upload \
               --file result.pdf \
