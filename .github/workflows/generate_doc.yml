@@ -34,6 +34,14 @@ jobs:
       # Check out the repo...
       - uses: actions/checkout@v3
         name: Check out repo
+        
+      # Push the PDF up to blob storage with its associated metadata...
+      - uses: Azure/CLI@v1
+        with:
+          inlineScript: |
+            #!/bin/bash
+            
+            echo "Ayyyyyyyyyy."
           
       # Let's build a doc...
       - uses: docker://pandoc/latex:2.9
@@ -43,12 +51,4 @@ jobs:
             --standalone 
             --output=result.pdf 
             ${{ env.DocList }}
-            
-      # Push the PDF up to blob storage with its associated metadata...
-      - uses: Azure/CLI@v1
-        with:
-          inlineScript: |
-            #!/bin/bash
-            
-            echo "Ayyyyyyyyyy."
             
