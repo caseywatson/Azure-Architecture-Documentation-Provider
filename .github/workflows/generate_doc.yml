@@ -48,5 +48,5 @@ jobs:
       - uses: azure/CLI@v1
         name: Upload PDF to blob storage
         with:
-          inlineScript: az storage blob upload --file "result.pdf" --container-name "pdfs" --blob "${{ env.DocId }}.pdf" --connection-string "${{ secrets.AZURE_BLOB_CONNECTION_STRING }}"
+          inlineScript: az storage blob upload --file "result.pdf" --container-name "pdfs" --name "${{ env.DocId }}.pdf" --connection-string "${{ secrets.AZURE_BLOB_CONNECTION_STRING }}"
             
