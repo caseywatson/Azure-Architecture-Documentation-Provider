@@ -53,7 +53,7 @@ jobs:
             az storage blob upload \
               --connection-string "${{ env.StorageConnectionString }}" \
               --container-name "pdfs" \
-              --file "output/result.pdf" \
+              --file "skibeebop.pdf" \
               --metadata docMetadata="${{ env.DocMetadata }}" \
               --name "${{ env.DocId }}.pdf"
             
