@@ -48,5 +48,5 @@ jobs:
       - uses: azure/CLI@v1
         name: Upload PDF to blob storage
         with:
-          inlineScript: az storage blob upload --data "Hey, what up?" --container-name "pdfs" --name "test.pdf" --connection-string "DefaultEndpointsProtocol=https;AccountName=ftadocgentest01;AccountKey=BGpsMrwCjNQmp580L6FYxZ8jYAm+LqWsXzLoYnv8KeRjzM3Bnptt2TcJD+NaJKRC816Ylfp+IbpN+ASt1IaLVg==;EndpointSuffix=core.windows.net"
+          inlineScript: echo "Ayyyyyy"
             
