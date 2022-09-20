@@ -1,3 +1,5 @@
+---
+
 # Application Insights
 
 ## Documentation
@@ -16,6 +18,5 @@
 * [Well-Architected Framework – Application Insights Operational Excellence](https://docs.microsoft.com/en-us/azure/architecture/framework/services/monitoring/application-insights/operational-excellence)
 * [Well-Architected Framework – Security and App Insights](https://docs.microsoft.com/en-us/azure/architecture/framework/services/monitoring/application-insights/security)
 * [Well-Architected Framework – App Insights and Cost Optimization](https://docs.microsoft.com/en-us/azure/architecture/framework/services/monitoring/application-insights/cost-optimization)
-
 
 ---
