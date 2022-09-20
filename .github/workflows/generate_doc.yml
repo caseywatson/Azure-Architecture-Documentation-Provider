@@ -43,7 +43,6 @@ jobs:
           DocList: ${{ github.event.inputs.docList }}
         with:
           args: >-
-            --standalone 
             --output=output/result.pdf 
             ${{ env.DocList }}
             
@@ -59,7 +58,7 @@ jobs:
             az storage blob upload \
               --connection-string "${{ env.StorageConnectionString }}" \
               --container-name "pdfs" \
-              --file "output/result.pdf" \
+              --file "flurburt.pdf" \
               --metadata docMetadata="${{ env.DocMetadata }}" \
               --name "${{ env.DocId }}.pdf"
             
