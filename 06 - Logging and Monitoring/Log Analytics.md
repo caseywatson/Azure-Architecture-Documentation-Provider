@@ -1,5 +1,3 @@
----
-
 # Log Analytics
 
 ## Documentation
@@ -15,5 +13,3 @@
 
 ## Other Resources
 * [Well-Architected Framework – Log Analytics cost optimization](https://docs.microsoft.com/en-us/azure/architecture/framework/services/monitoring/log-analytics/cost-optimization)
-
---- 
