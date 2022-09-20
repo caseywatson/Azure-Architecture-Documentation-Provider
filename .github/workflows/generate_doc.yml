@@ -26,9 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
-      DocId: ${{ github.event.inputs.docId }}
       DocList: ${{ github.event.inputs.docList }}
-      Metadata: ${{ github.event.inputs.metadata }}
 
     steps:
       # Check out the repo...
