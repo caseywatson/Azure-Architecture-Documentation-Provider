@@ -4,6 +4,10 @@ on:
   # This workflow will be dispatched only by the doc generator API.
   workflow_dispatch:
     inputs:
+      # This is what we'll save the blob as. Providing a guid is probably the easiest option here.
+      docId:
+        description: "A unique identifier for the generated doc; ideally a guid"
+        required: true
       # Pandoc requires that the input files be provided a single space-delimited string.
       # For simplicity's sake, we'll put that burden on the caller -- our doc generator API.
       docList:
@@ -22,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     
     env:
+      DocId: ${{ github.event.inputs.docId }}
       DocList: ${{ github.event.inputs.docList }}
       Metadata: ${{ github.event.inputs.metadata }}
 
@@ -51,3 +56,10 @@ jobs:
         with:
           inlineScript: |
           #!bin/bash
+          
+          az storage blob upload \
+            --file "output/result.pdf" \
+            --container "pdfs" \
+            --blob "${{ env.DocId }}.pdf" \
+            --metadata pdf_metadata="${{ env.Metadata }}"
+            
