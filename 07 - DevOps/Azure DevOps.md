@@ -1,5 +1,3 @@
----
-
 # Azure DevOps
 
 ## Documentation
@@ -16,5 +14,3 @@
 	
 ## Videos
 * [Setting up a Kubernetes build pipeline](https://www.youtube.com/watch?v=5irsAdKoEBU&list=PLLasX02E8BPCrIhFrc_ZiINhbRkYMKdPT&index=8)
-
----
