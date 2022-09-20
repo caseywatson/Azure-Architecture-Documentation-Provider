@@ -58,7 +58,7 @@ jobs:
             az storage blob upload \
               --connection-string "${{ env.StorageConnectionString }}" \
               --container-name "pdfs" \
-              --file "flurburt.pdf" \
+              --file "output/result.pdf" \
               --metadata docMetadata="${{ env.DocMetadata }}" \
               --name "${{ env.DocId }}.pdf"
             
